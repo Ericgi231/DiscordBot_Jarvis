@@ -12,5 +12,5 @@ ME = "me"
 MEME = ["meme", "memes"]
 PORN = ["porn", "porns"]
 PLEASE = "please"
-WILL = ["will", "am", "can", "is", "are"]
+WILL = ["will", "am", "can", "is", "are", "would", "do", "did"]
 MANY = ["how many", "what quantity", "what number", "number"]

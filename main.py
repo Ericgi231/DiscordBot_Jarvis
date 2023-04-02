@@ -8,7 +8,8 @@ from constant.paths import *
 from constant.values import *
 from constant.keyWords import *
 
-CLIENT = discord.Client()
+INTENTS = discord.Intents.all()
+CLIENT = discord.Client(intents=INTENTS)
 
 async def respondToInvalidMessage(message):
     await postText(message, getRandomWords())

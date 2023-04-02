@@ -33,7 +33,7 @@ async def postWikiUrl(message, text):
         print(url)
     else:
         query = text + " site:en.wikipedia.org/wiki"
-        for url in search(query, tld="co.in", num=1, stop=1, pause=2):
+        for url in search(query, num_results=1):
             await message.channel.send(url)
             print(url)
 
@@ -49,7 +49,7 @@ async def postManPageUrl(message, text):
         print(url)
     else:
         query = text + " site:man7.org/linux/man-pages"
-        for url in search(query, tld="co.in", num=1, stop=1, pause=2):
+        for url in search(query, num_results=1):
             await message.channel.send(url)
             print(url)
 
@@ -57,9 +57,13 @@ async def postGoogleSearchUrl(message, text):
     if text == "":
         text = getRandomWords()
     query = text
-    for url in search(query, tld="co.in", num=1, stop=1, pause=2):
-        await message.channel.send(url)
-        print(url)
+    try:
+        results = search(query, num_results=1)
+        for url in results:
+            await message.channel.send(url)
+            print(url)
+    except Exception as e:
+        print(e)
 
 async def postImageFromCollection(message, count, tags):
     files = os.listdir(COLLECTION_PATH)
@@ -94,7 +98,7 @@ async def postImageFromCollection(message, count, tags):
 
 async def postPornUrl(message, count, tags):
     for n in range(count):
-        r34url = "https://rule34.xxx/index.php?page=dapi&s=post&q=index"
+        r34url = "https://api.rule34.xxx/index.php?page=dapi&s=post&q=index"
         if tags != "":
             tags = tags.replace(' ','+')
             r34url += "&tags=" + tags
