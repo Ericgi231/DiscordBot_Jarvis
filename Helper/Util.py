@@ -1,6 +1,11 @@
 import random
-from constant.messages import DATE_TIME_MESSAGE_FORMAT
-from constant.keyWords import *
+import discord
+from Constant.Messages import DATE_TIME_MESSAGE_FORMAT
+from Constant.KeyWords import *
+from datetime import datetime
+from Constant.Messages import *
+from Constant.Values import *
+from Classes.ResponseContent import *
 
 def isAlphaToNumeric(word):
     if word == "a" or word == "an":
@@ -100,7 +105,7 @@ def getRandomDateTimeString():
 def getRandomWords():
     response = ""
     for x in range(random.randint(1,3)):
-        response += random.choice(list(open('data/words.txt'))).strip() + " "
+        response += random.choice(list(open('Data/Words.txt'))).strip() + " "
     return response
 
 def trimFillerIfPresent(text, word):
@@ -125,3 +130,28 @@ def trimLastWord(text):
         return ""
     else:
         return text.rsplit(' ', 1)[0]
+
+def logAction(message, startTime, endTime, responses, exception):
+    log = "### {} - {} ###\n".format(message.author, message.content)
+    for content in responses:
+        if content.embed:
+            log += "Embed: {}\n".format(content.embed.url)
+        if content.file:
+            log += "File: {}\n".format(content.file.filename)
+        if content.text:
+            log += "Text: {}\n".format(content.text)
+        if exception:
+            log += "Exception: {}\n".format(exception)
+    log += "StartTime: {}\n".format(startTime)
+    log += "EndTime: {}\n".format(endTime)
+    log += "RunTime: {}\n".format(endTime-startTime)
+    log += "### {} - {} ###\n".format(message.author, message.content)
+    print(log)
+
+def hasInjectText():
+    with open('Data/Inject.txt', 'r') as fin:
+        data = fin.read().splitlines(True)
+    return len(data) > 0
+
+def isRandomFailure():
+    return random.randint(0,FAIL_CHANCE) == 0
