@@ -14,4 +14,5 @@ MAGIC_EIGHT_BALL_MESSAGES = ["Yes", "No", "Maybe", "Probably", "Probably Not", "
 DATE_TIME_MESSAGE_FORMAT = "{0} {1}, {2}:{3}{4}"
 ERROR_OVER_LIMIT_MESSAGE = "Sorry, my current post limit is {0}".format(str(POST_LIMIT))
 ERROR_EXCEPTION_MESSAGE = "Something went wrong (Likely Google Rate Limited)"
+ERROR_POST_FAILED_MESSAGE = "Something went wrong (Likely broke discord message rules)"
 ERROR_INVALID_USE_MESSAGE = "I do not understand"

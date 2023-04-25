@@ -23,8 +23,9 @@ from Actions.WikiAction import *
 from Actions.InjectedTextAction import *
 from Actions.RandomWordsAction import *
 from Actions.ConstantTextAction import *
+from Actions.FarmAction import *
 
-def parseMessage(message):
+async def parseMessage(message):
     #Early exits
     if isRandomFailure():
         return randomFailureAction()
@@ -41,6 +42,9 @@ def parseMessage(message):
             return helpAction()
         elif text.startswith(tuple(HELLO)):
             return helloAction()
+        elif text.startswith(CANCEL):
+            emojiList = await message.guild.fetch_emojis()
+            return farmAction(emojiList)
         elif text.startswith(THANK):
             return cringeAction()
         elif text.startswith(WHEN):

@@ -28,12 +28,17 @@ async def on_message(message):
     exception = ""
     startTime = datetime.now()
     try:
-        responses = parseMessage(message)
+        responses = await parseMessage(message)
     except Exception as e:
         responses = ConstantTextAction(ERROR_EXCEPTION_MESSAGE)
         exception = e
     for response in responses:
+        try:
             await sendMessageReply(message, response)
+        except Exception as e:
+            responses = ConstantTextAction(ERROR_POST_FAILED_MESSAGE)
+            exception = e
+            await sendMessageReply(message, responses.pop(0))
     endTime = datetime.now()
     logAction(message, startTime, endTime, responses, exception)
 

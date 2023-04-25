@@ -36,8 +36,8 @@ def postPornAction(count, tags):
             responses.append(ResponseContent(text=url))
         else:
             if len(tags.split()) > 1:
-                return ResponseContent(text="No porn found with tags `"+ tags.replace(' ','`, `') + "`")
+                responses.append(ResponseContent(text="No porn found with tags `"+ tags.replace(' ','`, `') + "`"))
             else:
-                return ResponseContent(text="No porn found with tag `" + tags + "`")
+                responses.append(ResponseContent(text="No porn found with tag `" + tags + "`"))
             
     return responses

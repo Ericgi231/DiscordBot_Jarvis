@@ -5,6 +5,7 @@ THANK = "thank"
 WHAT = "what"
 WHEN = "when"
 GOOGLE = "google"
+CANCEL = "cancel"
 WIKI = "wiki"
 MAN = "man"
 SHOW = ["show", "post"]
